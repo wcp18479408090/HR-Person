@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DeptDao">
+
+    <resultMap type="com.entity.Dept" id="DeptMap">
+        <result property="dId" column="d_id" jdbcType="INTEGER"/>
+        <result property="dName" column="d_name" jdbcType="VARCHAR"/>
+        <result property="dDesc" column="d_desc" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DeptMap">
+        select
+          d_id, d_name, d_desc
+        from personmanage.dept
+        where d_id = #{dId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DeptMap">
+        select
+          d_id, d_name, d_desc
+        from personmanage.dept
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DeptMap">
+        select
+          d_id, d_name, d_desc
+        from personmanage.dept
+        <where>
+            <if test="dId != null">
+                and d_id = #{dId}
+            </if>
+            <if test="dName != null and dName != ''">
+                and d_name = #{dName}
+            </if>
+            <if test="dDesc != null and dDesc != ''">
+                and d_desc = #{dDesc}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="dId" useGeneratedKeys="true">
+        insert into personmanage.dept(d_name, d_desc)
+        values (#{dName}, #{dDesc})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update personmanage.dept
+        <set>
+            <if test="dName != null and dName != ''">
+                d_name = #{dName},
+            </if>
+            <if test="dDesc != null and dDesc != ''">
+                d_desc = #{dDesc},
+            </if>
+        </set>
+        where d_id = #{dId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from personmanage.dept where d_id = #{dId}
+    </delete>
+
+</mapper>

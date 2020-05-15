@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration核心配置文件-->
+
+<configuration>
+    <properties resource="mysql.properties"/>
+
+    <settings>
+    <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <typeAliases>
+    <!--      <typeAlias type="com.Bean.User" alias="User" >  -->
+    <!-- package可以指定一个包名，改包下面的所有Bean 都默认以小写命名    -->
+    <package name="com.entity"/>
+   </typeAliases>
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
+
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--          开启事物  -->
+            <transactionManager type="JDBC"></transactionManager>
+<!--          开启连接池  -->
+            <dataSource  type="POOLED">
+                <property name="driver" value="${jdbc.driverClassName}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--    映射一个实现类 就类似以前的 ImpiUesrDao   -->
+        <!--    每一个Mapper.xml 都需要放在MyBatis核心配置文件中注册-->
+        <mapper resource="Mapper/DeptMapper.xml"/>
+        <mapper resource="Mapper/EmpMapper.xml"/>
+        <mapper resource="Mapper/JobMapper.xml"/>
+
+    </mappers>
+</configuration>

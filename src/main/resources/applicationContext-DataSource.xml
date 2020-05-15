@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+<!--注解扫描-->
+<!-- 读取配置文件   -->
+    <context:property-placeholder location="classpath:mysql.properties"/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+<!--创建sqlSession工厂-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+<!--    sqlSession配置数据源    -->
+        <property name="dataSource" ref="dataSource"/>
+<!-- 注册MyBatis映射文件-->
+        <property name="mapperLocations" value="classpath:Mapper/*.xml"/>
+<!--   为java实体类取别名 默认实体类名小写-->
+        <property name="typeAliasesPackage" value="com.entity"/>
+<!--分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                            params=value1
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+<!-- 创建接口类对象 自动将指定包里的所有接口与指定的mapperLocations里面所有的映射文件对应
+  ,并创建好所有的mapper对象-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+<!--    指定映射接口包路径    -->
+        <property name="basePackage" value="com.dao"/>
+    </bean>
+
+
+</beans>

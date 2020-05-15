@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.EmpDao">
+
+    <resultMap type="com.entity.Emp" id="EmpMap">
+        <result property="eId" column="e_id" jdbcType="INTEGER"/>
+        <result property="eName" column="e_name" jdbcType="VARCHAR"/>
+        <result property="eSex" column="e_sex" jdbcType="VARCHAR"/>
+        <result property="eIphone" column="e_iphone" jdbcType="VARCHAR"/>
+        <result property="eCar" column="e_car" jdbcType="VARCHAR"/>
+        <result property="eEmail" column="e_email" jdbcType="VARCHAR"/>
+        <result property="eAddres" column="e_addres" jdbcType="VARCHAR"/>
+        <result property="eRecord" column="e_record" jdbcType="VARCHAR"/>
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="jId" column="j_id" jdbcType="INTEGER"/>
+        <result property="eDate" column="e_date" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="EmpMap">
+        select
+          e_id, e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, dept_id, j_id, e_date
+        from personmanage.emp
+        where e_id = #{eId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="EmpMap">
+        select
+          e_id, e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, dept_id, j_id, e_date
+        from personmanage.emp
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="EmpMap">
+        select
+          e_id, e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, dept_id, j_id, e_date
+        from personmanage.emp
+        <where>
+            <if test="eId != null">
+                and e_id = #{eId}
+            </if>
+            <if test="eName != null and eName != ''">
+                and e_name = #{eName}
+            </if>
+            <if test="eSex != null and eSex != ''">
+                and e_sex = #{eSex}
+            </if>
+            <if test="eIphone != null and eIphone != ''">
+                and e_iphone = #{eIphone}
+            </if>
+            <if test="eCar != null and eCar != ''">
+                and e_car = #{eCar}
+            </if>
+            <if test="eEmail != null and eEmail != ''">
+                and e_email = #{eEmail}
+            </if>
+            <if test="eAddres != null and eAddres != ''">
+                and e_addres = #{eAddres}
+            </if>
+            <if test="eRecord != null and eRecord != ''">
+                and e_record = #{eRecord}
+            </if>
+            <if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+            <if test="jId != null">
+                and j_id = #{jId}
+            </if>
+            <if test="eDate != null">
+                and e_date = #{eDate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="eId" useGeneratedKeys="true">
+        insert into personmanage.emp(e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, dept_id, j_id, e_date)
+        values (#{eName}, #{eSex}, #{eIphone}, #{eCar}, #{eEmail}, #{eAddres}, #{eRecord}, #{deptId}, #{jId}, #{eDate})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update personmanage.emp
+        <set>
+            <if test="eName != null and eName != ''">
+                e_name = #{eName},
+            </if>
+            <if test="eSex != null and eSex != ''">
+                e_sex = #{eSex},
+            </if>
+            <if test="eIphone != null and eIphone != ''">
+                e_iphone = #{eIphone},
+            </if>
+            <if test="eCar != null and eCar != ''">
+                e_car = #{eCar},
+            </if>
+            <if test="eEmail != null and eEmail != ''">
+                e_email = #{eEmail},
+            </if>
+            <if test="eAddres != null and eAddres != ''">
+                e_addres = #{eAddres},
+            </if>
+            <if test="eRecord != null and eRecord != ''">
+                e_record = #{eRecord},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="jId != null">
+                j_id = #{jId},
+            </if>
+            <if test="eDate != null">
+                e_date = #{eDate},
+            </if>
+        </set>
+        where e_id = #{eId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from personmanage.emp where e_id = #{eId}
+    </delete>
+
+</mapper>
