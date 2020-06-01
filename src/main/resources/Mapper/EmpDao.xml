@@ -11,17 +11,52 @@
         <result property="eEmail" column="e_email" jdbcType="VARCHAR"/>
         <result property="eAddres" column="e_addres" jdbcType="VARCHAR"/>
         <result property="eRecord" column="e_record" jdbcType="VARCHAR"/>
-        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
-        <result property="jId" column="j_id" jdbcType="INTEGER"/>
         <result property="eDate" column="e_date" jdbcType="OTHER"/>
+
+        <association property="dept" javaType="Dept">
+            <id property="dId" column="d_id"/>
+            <result property="dName" column="d_name"/>
+        </association>
+
+        <association property="job" javaType="Job">
+            <id property="jId" column="jid"/>
+            <result property="jName" column="j_name"/>
+        </association>
+
     </resultMap>
+
+
+
+    <select id="selectDeptById" resultType="dept">
+        select * from dept where d_id = #{did};
+    </select>
+
+    <resultMap id="EmpresultMap" autoMapping="true" type="emp">
+        <result property="eId" column="e_id" jdbcType="INTEGER"/>
+        <result property="eName" column="e_name" jdbcType="VARCHAR"/>
+        <result property="eSex" column="e_sex" jdbcType="VARCHAR"/>
+        <result property="eIphone" column="e_iphone" jdbcType="VARCHAR"/>
+        <result property="eCar" column="e_car" jdbcType="VARCHAR"/>
+        <result property="eEmail" column="e_email" jdbcType="VARCHAR"/>
+        <result property="eAddres" column="e_addres" jdbcType="VARCHAR"/>
+        <result property="eRecord" column="e_record" jdbcType="VARCHAR"/>
+        <result property="eDate" column="e_date" jdbcType="OTHER"/>
+
+        <association property="dept" javaType="dept" select="selectDeptById" column="dept_id">
+
+    </association>
+    </resultMap>
+
+    <select id="selectEmpAll" resultMap="EmpresultMap">
+        select  * from emp;
+    </select>
 
     <!--查询单个-->
     <select id="queryById" resultMap="EmpMap">
         select
-          e_id, e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, dept_id, j_id, e_date
-        from personmanage.emp
-        where e_id = #{eId}
+          e_id, e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, e_date,
+           b.d_id,b.d_name, c.j_id as jid ,c.j_name from emp a,dept b,job c
+        where a.dept_id =b.d_id and a.j_id = c.j_id and a.e_id = #{eId} and state > 0
     </select>
 
     <!--查询指定行数据-->
@@ -34,9 +69,7 @@
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="EmpMap">
-        select
-          e_id, e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, dept_id, j_id, e_date
-        from personmanage.emp
+        SELECT a.*,b.d_id,b.d_name, c.j_id as jid ,c.j_name from emp a,dept b,job c
         <where>
             <if test="eId != null">
                 and e_id = #{eId}
@@ -62,22 +95,24 @@
             <if test="eRecord != null and eRecord != ''">
                 and e_record = #{eRecord}
             </if>
-            <if test="deptId != null">
-                and dept_id = #{deptId}
+            <if test="dept.dId != null">
+                and   dept_id = #{dept.dId}
             </if>
-            <if test="jId != null">
-                and j_id = #{jId}
+            <if test="job.jId != null">
+                and  a.j_id = #{job.jId}
             </if>
             <if test="eDate != null">
                 and e_date = #{eDate}
             </if>
+            and a.dept_id =b.d_id and a.j_id = c.j_id   and a.state >0 ORDER BY d_name desc
         </where>
+
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="eId" useGeneratedKeys="true">
         insert into personmanage.emp(e_name, e_sex, e_iphone, e_car, e_email, e_addres, e_record, dept_id, j_id, e_date)
-        values (#{eName}, #{eSex}, #{eIphone}, #{eCar}, #{eEmail}, #{eAddres}, #{eRecord}, #{deptId}, #{jId}, #{eDate})
+        values (#{eName}, #{eSex}, #{eIphone}, #{eCar}, #{eEmail}, #{eAddres}, #{eRecord}, #{dept.dId}, #{job.jId}, #{eDate})
     </insert>
 
     <!--通过主键修改数据-->
@@ -105,11 +140,11 @@
             <if test="eRecord != null and eRecord != ''">
                 e_record = #{eRecord},
             </if>
-            <if test="deptId != null">
-                dept_id = #{deptId},
+            <if test="dept.dId != null">
+                dept_id = #{dept.dId},
             </if>
-            <if test="jId != null">
-                j_id = #{jId},
+            <if test="job.jId != null">
+                j_id = #{job.jId},
             </if>
             <if test="eDate != null">
                 e_date = #{eDate},
@@ -119,8 +154,10 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from personmanage.emp where e_id = #{eId}
-    </delete>
+    <update id="deleteById">
+        update  emp set state = 0
+        where  e_id = #{eId}
+    </update>
+
 
 </mapper>

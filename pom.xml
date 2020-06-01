@@ -9,6 +9,13 @@
     <artifactId>personManage</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
 <!--    <build>-->
 <!--        <plugins>-->
 <!--            <plugin>-->
@@ -25,7 +32,7 @@
 
     <dependencies>
 
-        <!--文件上传-->
+<!--        文件上传-->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -84,7 +91,7 @@
             <version>5.2.5.RELEASE</version>
         </dependency>
 
-        <!--   S pringmvc    -->
+        <!--   Springmvc    -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -127,6 +134,13 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.25</version>
         </dependency>
+           <!--jstl-->
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
 
         <!-- jackson用于方法Json格式数据-->
         <dependency>
@@ -141,6 +155,36 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+
+<!--  shiro安全验证框架      -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+<!--        shiro整合web-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
+        <!--shiro整合spring-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
+
+<!--        使用Spring实现邮件发送  使用到的架包：-->
+<!--        1. javax.mail-1.4.4.jsr-->
+<!--        <dependency>-->
+<!--            <groupId>com.sun.mail</groupId>-->
+<!--            <artifactId>javax.mail</artifactId>-->
+<!--            <version>1.6.2</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -157,14 +201,7 @@
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>6</source>
-                    <target>6</target>
-                </configuration>
-            </plugin>
+
         </plugins>
     </build>
 

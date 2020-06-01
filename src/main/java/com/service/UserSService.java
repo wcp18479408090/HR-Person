@@ -1,7 +1,9 @@
 package com.service;
 
+import com.entity.Notice;
 import com.entity.UserS;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (UserS)表服务接口
@@ -11,6 +13,11 @@ import java.util.List;
  */
 public interface UserSService {
 
+    UserS login(Map<String,Object> map);
+//根据用户传递的参数查询
+    List<UserS> queryByParam(UserS userS);
+
+    List<UserS> queryAll();
     /**
      * 通过ID查询单条数据
      *
@@ -34,7 +41,7 @@ public interface UserSService {
      * @param userS 实例对象
      * @return 实例对象
      */
-    UserS insert(UserS userS);
+    int insert(UserS userS);
 
     /**
      * 修改数据
@@ -42,14 +49,14 @@ public interface UserSService {
      * @param userS 实例对象
      * @return 实例对象
      */
-    UserS update(UserS userS);
+    int update(UserS userS);
 
     /**
      * 通过主键删除数据
      *
-     * @param uId 主键
+     *
      * @return 是否成功
      */
-    boolean deleteById(Integer uId);
+    boolean deleteById(List<Integer> ids) throws Exception;
 
 }

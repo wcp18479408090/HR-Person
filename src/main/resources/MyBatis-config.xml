@@ -38,9 +38,11 @@
     <mappers>
         <!--    映射一个实现类 就类似以前的 ImpiUesrDao   -->
         <!--    每一个Mapper.xml 都需要放在MyBatis核心配置文件中注册-->
-        <mapper resource="Mapper/DeptMapper.xml"/>
-        <mapper resource="Mapper/EmpMapper.xml"/>
-        <mapper resource="Mapper/JobMapper.xml"/>
-
+<!--        <mapper resource="Mapper/DeptMapper.xml"/>-->
+<!--        <mapper resource="Mapper/EmpMapper.xml"/>-->
+<!--        <mapper resource="Mapper/JobMapper.xml"/>-->
+<mapper resource="Mapper/UserSDao.xml"/>
+        <mapper resource="Mapper/EmpDao.xml"/>
+        <mapper resource="Mapper/DeptDao.xml"/>
     </mappers>
 </configuration>

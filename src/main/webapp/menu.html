@@ -1,0 +1,114 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>人事管理系统后台</title>
+
+
+    <style>
+        #dome1{
+            position: absolute;
+            left:300px;
+            top:50px;
+
+        a:hover{
+            text-decoration: underline;
+        }
+        ul{
+            width: 200px;
+            text-align: center;
+
+        }
+        li{
+            margin: -5px;
+            list-style: none;
+            margin-buttom:5px;
+        }
+        a{
+            margin: -5px;
+            text-decoration: none;
+            margin: 0px;
+        }
+    </style>
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">人事管理后台</div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    <span>欢迎您:admin</span>
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="/login.jsp">退了</a></li>
+        </ul>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+
+
+
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a class="" href="user.html" target="myFrame">查看用户</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">部门管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a class="" href="dept.html" target="myFrame">查看部门</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">职位管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a class="" href="job.html" target="myFrame">查看职位</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">员工管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a class="" href="emp.html" target="myFrame">查看员工</a></dd>
+
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">公告管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a class="" href="notice.html" target="myFrame">查看公告</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">文件管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a class="" href="document.html" target="myFrame">文件下载</a></dd>
+                        <dd><a class="" href="upload.html" target="myFrame">文件上传</a></dd>
+                    </dl>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <iframe name="myFrame"  src="user.html" frameborder="0" width="100%" height="95%" ></iframe>
+    </div>
+</div>
+<script src="../layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+
+</body>
+</html>

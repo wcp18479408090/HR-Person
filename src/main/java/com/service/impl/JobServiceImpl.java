@@ -19,6 +19,11 @@ public class JobServiceImpl implements JobService {
     @Resource
     private JobDao jobDao;
 
+    @Override
+    public List<Job> queryAll(Job job) {
+        return jobDao.queryAll(job);
+    }
+
     /**
      * 通过ID查询单条数据
      *
@@ -49,9 +54,9 @@ public class JobServiceImpl implements JobService {
      * @return 实例对象
      */
     @Override
-    public Job insert(Job job) {
-        this.jobDao.insert(job);
-        return job;
+    public int insert(Job job) {
+        return this.jobDao.insert(job);
+
     }
 
     /**
@@ -61,19 +66,33 @@ public class JobServiceImpl implements JobService {
      * @return 实例对象
      */
     @Override
-    public Job update(Job job) {
-        this.jobDao.update(job);
-        return this.queryById(job.getJId());
+    public int update(Job job) {
+        return  this.jobDao.update(job);
+
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param jId 主键
+     *
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer jId) {
-        return this.jobDao.deleteById(jId) > 0;
+    public boolean deleteById( List<Integer> ids) throws Exception{
+        int count = 0;
+        for (Integer id :ids){
+            int  num = this.jobDao.deleteById(id);
+            count += num;
+        }
+        if (count<ids.size()){
+            throw new Exception("删除出错");
+        }
+        return true;
+
+    }
+
+    @Override
+    public List<Job> queryByParam(Job job) {
+        return jobDao.queryByParam(job);
     }
 }

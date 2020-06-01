@@ -4,16 +4,18 @@
 
     <resultMap type="com.entity.Document" id="DocumentMap">
         <result property="dId" column="d_id" jdbcType="INTEGER"/>
-        <result property="dName" column="d_name" jdbcType="VARCHAR"/>
         <result property="dFilename" column="d_fileName" jdbcType="VARCHAR"/>
         <result property="dDate" column="d_date" jdbcType="OTHER"/>
         <result property="uId" column="u_id" jdbcType="INTEGER"/>
+        <result property="suffix" column="suffix" jdbcType="VARCHAR"/>
+        <result property="size" column="size" jdbcType="INTEGER"/>
+        <result property="filepash" column="filePash" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="DocumentMap">
         select
-          d_id, d_name, d_fileName, d_date, u_id
+          d_id, d_fileName, d_date, u_id, suffix, size, filePash
         from personmanage.document
         where d_id = #{dId}
     </select>
@@ -21,22 +23,19 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="DocumentMap">
         select
-          d_id, d_name, d_fileName, d_date, u_id
+          d_id, d_fileName, d_date, u_id, suffix, size, filePash
         from personmanage.document
-        limit #{offset}, #{limit}
+        limit #{pageNum}, #{pageSize}
     </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="DocumentMap">
         select
-          d_id, d_name, d_fileName, d_date, u_id
+          d_id, d_fileName, d_date, u_id, suffix, size, filePash
         from personmanage.document
         <where>
             <if test="dId != null">
                 and d_id = #{dId}
-            </if>
-            <if test="dName != null and dName != ''">
-                and d_name = #{dName}
             </if>
             <if test="dFilename != null and dFilename != ''">
                 and d_fileName = #{dFilename}
@@ -47,22 +46,28 @@
             <if test="uId != null">
                 and u_id = #{uId}
             </if>
+            <if test="suffix != null and suffix != ''">
+                and suffix = #{suffix}
+            </if>
+            <if test="size != null">
+                and size = #{size}
+            </if>
+            <if test="filepash != null and filepash != ''">
+                and filePash = #{filepash}
+            </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="dId" useGeneratedKeys="true">
-        insert into personmanage.document(d_name, d_fileName, d_date, u_id)
-        values (#{dName}, #{dFilename}, #{dDate}, #{uId})
+        insert into personmanage.document(d_fileName, d_date, u_id, suffix, size, filePash)
+        values (#{dFilename}, #{dDate}, #{uId}, #{suffix}, #{size}, #{filepash})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update personmanage.document
         <set>
-            <if test="dName != null and dName != ''">
-                d_name = #{dName},
-            </if>
             <if test="dFilename != null and dFilename != ''">
                 d_fileName = #{dFilename},
             </if>
@@ -71,6 +76,15 @@
             </if>
             <if test="uId != null">
                 u_id = #{uId},
+            </if>
+            <if test="suffix != null and suffix != ''">
+                suffix = #{suffix},
+            </if>
+            <if test="size != null">
+                size = #{size},
+            </if>
+            <if test="filepash != null and filepash != ''">
+                filePash = #{filepash},
             </if>
         </set>
         where d_id = #{dId}

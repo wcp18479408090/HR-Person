@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 <!--注解扫描-->
 <!-- 读取配置文件   -->
     <context:property-placeholder location="classpath:mysql.properties"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-
+<!--        <property name="driver" value="${jdbc.driverClassName}"/>-->
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
@@ -43,6 +44,34 @@
 <!--    指定映射接口包路径    -->
         <property name="basePackage" value="com.dao"/>
     </bean>
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
+    <!--  事务配置  -->
+    <tx:advice transaction-manager="transactionManager" id="interceptor">
+        <tx:attributes>
+            <tx:method name="add*"/>
+            <tx:method name="update*"/>
+            <tx:method name="delete*"/>
+            <tx:method name="/*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
 
+<!--  配置Aop  -->
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.service.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="pc"/>
+    </aop:config>
+
+<!--    <bean  id="mailConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+<!--        <property name="location" value="classpath:main.properties"/>-->
+<!--    </bean>-->
+
+<!--    <bean class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
+<!--        <property name="host" value="smtp.qq.com"/>-->
+<!--        <property name="username" value="${mail.username}"/>-->
+<!--        <property name="password" value="${mail.password}"/>-->
+<!--        <property name="defaultEncoding" value="${mail.encoding}"/>-->
+<!--    </bean>-->
 </beans>

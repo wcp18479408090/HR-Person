@@ -19,6 +19,11 @@ public class DeptServiceImpl implements DeptService {
     @Resource
     private DeptDao deptDao;
 
+    @Override
+    public List<Dept> queryAll(Dept dept) {
+        return deptDao.queryAll(dept);
+    }
+
     /**
      * 通过ID查询单条数据
      *
@@ -49,9 +54,9 @@ public class DeptServiceImpl implements DeptService {
      * @return 实例对象
      */
     @Override
-    public Dept insert(Dept dept) {
-        this.deptDao.insert(dept);
-        return dept;
+    public int insert(Dept dept) {
+        return  this.deptDao.insert(dept);
+
     }
 
     /**
@@ -61,19 +66,32 @@ public class DeptServiceImpl implements DeptService {
      * @return 实例对象
      */
     @Override
-    public Dept update(Dept dept) {
-        this.deptDao.update(dept);
-        return this.queryById(dept.getDId());
+    public int update(Dept dept) {
+       return this.deptDao.update(dept);
+
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param dId 主键
+     *
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer dId) {
-        return this.deptDao.deleteById(dId) > 0;
+    public boolean deleteById(List<Integer> ids)throws Exception {
+        int count = 0;
+        for (Integer id :ids){
+          int i = this.deptDao.deleteById(id);
+          count +=i;
+        }
+        if(count<ids.size()){
+            throw  new Exception("删除出错");
+        }
+      return true;
+    }
+
+    @Override
+    public List<Dept> queryByParam(Dept dept) {
+        return deptDao.queryByParam(dept);
     }
 }

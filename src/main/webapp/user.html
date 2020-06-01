@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        a:hover {
+            color: red;
+            text-underline: #0000BB;
+        }
+        a{
+            margin: 5px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="container  bg-dark">-->
+    <div class="card  bg-white">
+
+        <div class="card-header bg-light border" >
+            <i class="fa fa-list-ul fa-lg ml-2 mr-2" ></i>
+            用户信息列表
+        </div>
+        <div class="card-body">
+
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <button type="button" data-toggle="modal"  data-target="#staticBackdrop" class="btn btn-primary mb-2 ml-3  "><i class="fa fa-calendar-plus-o fa-lg ml-2 mr-2" ></i>添加用户</button>
+                    <!-- <input type="button" class=" ml-3  form-control mb-2 btn-primary" id="inlineFormInput"  value="添加学员"> -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">添加用户</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/userS/add" method="post">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword4">登录名</label>
+                                                <input type="text" class="form-control" value="" id="inputPassword4" name="uLoginname" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail1">密码</label>
+                                                <input type="text" class="form-control" value="" id="inputEmail1" name="uPass" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword5">用户名</label>
+                                                <input type="text" class="form-control" value="" id="inputPassword5" name="uName" required>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label>状态</label>
+                                                <select class="form-control form-control-sm"  style="height: 40px" id="sele" name="uState">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="date">创建时间</label>
+                                                <input type="date" class="form-control" value="" id="date" name="uDate" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--            修改            -->
+                    <div class="modal fade" id="UpstaticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="UpstaticBackdropLabel">修改用户信息</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/userS/update" method="post">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+
+                                                <label for="UpinputEmail4">序号</label>
+                                                <input type="text" class="form-control" value="" id="UpinputEmail4" name="uId" required READONLY>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputPassword4">登录名</label>
+                                                <input type="text" class="form-control" value="" id="UpinputPassword4" name="uLoginname" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputEmail1">密码</label>
+                                                <input type="text" class="form-control" value="" id="UpinputEmail1" name="uPass" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputPassword5">用户名</label>
+                                                <input type="text" class="form-control" value="" id="UpinputPassword5" name="uName" required>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label>状态</label>
+                                                <select class="form-control form-control-sm"  style="height: 40px" id="sel" name="uState">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="DATE">创建时间</label>
+                                                <input type="date" class="form-control" value="" id="DATE" name="uDate" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary">修改</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--             修改完成           -->
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                    <div class="input-group mb-2 ml-3 ">
+                        <div class="input-group-prepend mt-1">
+                            搜索:
+                        </div>
+
+                        <form class="form-inline" id="divInp">
+                         <input type="text" id="inp" class="form-control   ml-3" id="inlineFormInputGroup" placeholder="请输入用户名">
+                         <input type="text" id="inp1" class="form-control   ml-3" id="ilineFormInputGroup" placeholder="请输入用户状态">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <button type="button" onclick="select()" class="btn btn-primary mb-2 ml-3 "><i class="fa fa-search fa-lg ml-2 mr-2" ></i>搜索</button>
+                    <button type="button" onclick="batchDel()" class="btn btn-danger mb-2">删除选择行</button>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <!-- footer -->
+        <div class="card-footer text-center ">
+            <form action="/userS/delete" id="deleteUser" method="post">
+            <table id="tab" class="table bg-white">
+                <thead>
+                <th><input type="checkbox" name="check" id="check" value="" /></th>
+                <th scope="col">序号</th>
+                <th scope="col">登录名</th>
+                <th scope="col">密码</th>
+                <th scope="col">用户名</th>
+                <th scope="col">状态</th>
+                <th scope="col">创建时间</th>
+                <th scope="col">操作</th>
+                </thead>
+               </table>
+               	<select name="pageSize" style="width:160px">
+                    <option value="3">3条/页</option>
+                    <option  value="6">6条/页</option>
+                     <option value="9">9条/页</option>
+                    <option value="12">12条/页</option>
+              </select>
+            </form>
+        </div>
+    </div>
+<!--</div>-->
+<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap.bundle.js"></script>
+<script>
+
+    $("select[name='pageSize']").blur(function(){
+        getUserInfo(pageNum,this.value)
+    });
+    // $("table").on("blur","select[name='pageSize']",function(){
+    //     alert(this.value);
+    //     console.log('失去焦点');
+    // });
+   // console.log($("input[name='ids']").val());
+    function batchDel(){
+        var num=0;
+        let elementsByName = document.getElementsByName("ids");
+        for (var i = 0;i<elementsByName.length;i++){
+            if(elementsByName[i].checked){
+                num = 1;
+            }
+        }
+        if(num==0){
+            alert('最少选择一条数据');
+            return false;
+        }
+        if(confirm('确定删除选择行吗?')){
+            $("#deleteUser").submit();
+            // getDeptInFo(1);
+        }else {
+            ;
+        }
+    };
+
+    var inp=document.getElementById("check");
+    var ck=document.getElementsByName("ids");
+    var k=0;
+    inp.onclick=function(){
+        for(var i=0;i<ck.length;i++)
+            ck[i].checked=this.checked;
+
+    }
+    //全选
+   $("table").on("click","input[name='ids']",function(){
+
+       if(this.checked){
+           k++;
+       }else{
+           k--;
+       }
+       if(k==ck.length){
+           inp.checked = true;
+
+       }else{
+           inp.checked=false;
+       }
+   })
+    //根据参数进行分页查询,传递页码
+    function toPageByParam(pageNum,pageSize) {
+        k=0;
+        document.getElementById("check").checked=false;
+        ParamByLimit(pageNum,$("select[name='pageSize']").val());
+    }
+
+//根据参数进行分页查询
+function ParamByLimit(pageNum,pageSize){
+    var input = $("#divInp input");
+    $.post("/userS/query",{"pageNum":pageNum,"pageSize":pageSize,"uName":input[0].value,"uState":input[1].value},function (result) {
+        pageNum = result.pageNum;
+        pages = result.pages;
+        $("#tab").find("tr:gt(0)").remove();
+        var html;
+        for(var i =0; i<result.list.length;i++){
+            var res = result.list[i];
+            html += "<tr>";
+            html +="<td> <input type=\"checkbox\" name=\"ids\" id=\"\" value="+res.uid+"></td>"
+            html += "<td>" + (i+1) + "</td><td>" + res.uloginname + "</td><td>" + res.upass + "</td><td>" + res.uname + "</td><td>" + res.ustate + "</td>";
+            html += "<td>" + res.udate + "</td>";
+            html += "<td>\n" +
+                "<button type=\"button\" data-toggle=\"modal\"  data-target=\"#UpstaticBackdrop\" class=\"btn border-primary text-primary\"  value=" + res.uid + ">\n" +
+                "<svg class=\"bi bi-pencil-square\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                " <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>\n" +
+                " <path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z\" clip-rule=\"evenodd\"/>\n" +
+                "</svg>\n" +
+                "修改</button>\n" +
+                "<button type=\"button\" class=\"btn border-danger text-danger\" onclick=\"del(this)\" value=" + res.uid + ">\n" +
+                "<svg class=\"bi bi-trash\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                " <path d=\"M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z\"/>\n" +
+                " <path fill-rule=\"evenodd\" d=\"M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z\" clip-rule=\"evenodd\"/>\n" +
+                "</svg>\n" +
+                "删除</button></td>"
+            html += "</tr>";
+        }
+        $("#tab").next("p").find("a").remove();
+        var p="<p class='text-center'>";
+        if(pageNum>1){
+            p+="<a class=\"text-primary\"onclick='toPageByParam("+(result.pageNum-1)+")'>上一页</a>";
+        }
+
+        for (var i=0;i<pages;i++){
+
+            p+="<a class=\"text-primary\"onclick='toPageByParam("+(i+1)+")'>"+(i+1)+"</a>";
+        }
+        if(pageNum<pages){
+            p+="<a class=\"text-primary\"onclick='toPageByParam("+(result.pageNum+1)+")'>下一页</a>";
+        }
+        p+="</p>";
+        $("#tab").append(html);
+        $("#tab").after(p);
+
+    });
+    //动态根据用户选择是条数显示数据
+
+}
+    //根据参数查询
+    function select(){
+        var input = $("#divInp input");
+        if(input[0].value==''&&input[1].value==''){
+            alert('数据为空，查询所有')
+            getUserInfo();
+            return;
+        }
+
+        if(input[0].value!=''||input[1].value!='')
+        $.post("/userS/query",{"pageNum":1,"pageSize":$("select[name='pageSize']").val(),"uName":input[0].value,"uState":input[1].value},function (result) {
+            pageNum = result.pageNum;
+            pages = result.pages;
+            $("#tab").find("tr:gt(0)").remove();
+            var html;
+            if(result.list.length<1){
+                $("#tab").find("tr:gt(0)").remove();
+                $("#tab").next("p").remove();
+                alert('没有查询到相关数据');
+                return;
+            }
+            if(result.list.length>0){
+            for(var i =0; i<result.list.length;i++){
+                var res = result.list[i];
+                html += "<tr>";
+                html +="<td> <input type=\"checkbox\" name=\"ids\" id=\"\" value="+res.uid+"></td>"
+                html += "<td>" + (i+1) + "</td><td>" + res.uloginname + "</td><td>" + res.upass + "</td><td>" + res.uname + "</td><td>" + res.ustate + "</td>";
+                html += "<td>" + res.udate + "</td>";
+                html += "<td>\n" +
+                    "<button type=\"button\" data-toggle=\"modal\"  data-target=\"#UpstaticBackdrop\" class=\"btn border-primary text-primary\"  value=" + res.uid + ">\n" +
+                    "<svg class=\"bi bi-pencil-square\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    " <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>\n" +
+                    " <path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z\" clip-rule=\"evenodd\"/>\n" +
+                    "</svg>\n" +
+                    "修改</button>\n" +
+                    "<button type=\"button\" class=\"btn border-danger text-danger\" onclick=\"del(this)\" value=" + res.uid + ">\n" +
+                    "<svg class=\"bi bi-trash\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    " <path d=\"M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z\"/>\n" +
+                    " <path fill-rule=\"evenodd\" d=\"M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z\" clip-rule=\"evenodd\"/>\n" +
+                    "</svg>\n" +
+                    "删除</button></td>"
+                html += "</tr>";
+            }
+                $("#tab").next("p").find("a").remove();
+                var p="<p class='text-center'>";
+                if(result.size<=result.total){
+                    if(pageNum>1){
+                        p+="<a class=\"text-primary\"onclick='topage("+(result.pageNum-1)+")'>上一页</a>";
+                    }
+                }
+                var j=0;
+                for (var i =0;i<result.total;i+=result.pageSize){
+
+                    p+="<a class=\"text-primary\"onclick='topage("+(j+1)+")'>"+(j+1)+"</a>";
+                    j++;
+                }
+                if(result.pageSize<result.total) {
+                    if (pageNum < pages) {
+                        p += "<a class=\"text-primary\"onclick='topage(" + (result.pageNum + 1) + ")'>下一页</a>";
+                    }
+                }
+                p+="</p>";
+            $("#tab").append(html);
+            $("#tab").after(p);
+            }
+        });
+
+    };
+
+    $(function () {
+        getUserInfo();
+    })
+
+    //删除
+    function del(num) {
+
+        if(confirm('确定删除么?')){
+       $.post("/userS/delete",{"ids":num.value},function (result) {
+                 if(result){
+                     alert('删除成功');
+                     getUserInfo(pageNum);
+                     return ;
+                 };
+       })};
+    }
+    var pageNum=0;
+    var pages=0;
+    function getUserInfo(pageNum,pageSize){
+
+        var input = $("#divInp input");
+$.post("/userS/selectAll",{"pageNum":pageNum,"pageSize":pageSize,"uName":input[0].value,"uState":input[1].value},function (result) {
+
+    if(result.list==null){
+        if(confirm('权限不足，是否重新登陆？')){
+            window.parent.location.href="/login.html";
+        }
+    }else{
+        console.log(result);
+    }
+    console.log(result);
+    pageNum = result.pageNum;
+    pages = result.pages;
+    $("#tab").find("tr:gt(0)").remove();
+    var html;
+      for(var i =0; i<result.list.length;i++){
+
+          var res = result.list[i];
+          $("#select").append("<option value='"+res.uid+"'>"+res.uname+"</option>");
+          html += "<tr>";
+          html +="<td> <input type=\"checkbox\" name=\"ids\" id=\"\" value="+res.uid+"></td>"
+          html += "<td>" + (i+1) + "</td><td>" + res.uloginname + "</td><td>" + res.upass + "</td><td>" + res.uname + "</td><td>" + res.ustate + "</td>";
+          html += "<td>" + res.udate + "</td>";
+          html += "<td>\n" +
+              "<button type=\"button\" data-toggle=\"modal\"  data-target=\"#UpstaticBackdrop\" class=\"btn border-primary text-primary\"  value=" + res.uid + ">\n" +
+              "<svg class=\"bi bi-pencil-square\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+              " <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>\n" +
+              " <path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z\" clip-rule=\"evenodd\"/>\n" +
+              "</svg>\n" +
+              "修改</button>\n" +
+              "<button type=\"button\" class=\"btn border-danger text-danger\" onclick=\"del(this)\" value=" + res.uid + ">\n" +
+              "<svg class=\"bi bi-trash\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+              " <path d=\"M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z\"/>\n" +
+              " <path fill-rule=\"evenodd\" d=\"M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z\" clip-rule=\"evenodd\"/>\n" +
+              "</svg>\n" +
+              "删除</button></td>"
+          html += "</tr>";
+    }
+    $("#tab").next("p").find("a").remove();
+    var p="<p class='text-center'>";
+    if(result.size<=result.total){
+      if(pageNum>1){
+        p+="<a class=\"text-primary\"onclick='topage("+(result.pageNum-1)+")'>上一页</a>";
+    }
+    }
+    var j=0;
+    for (var i =0;i<result.total;i+=result.pageSize){
+
+        p+="<a class=\"text-primary\"onclick='topage("+(j+1)+")'>"+(j+1)+"</a>";
+        j++;
+    }
+    if(result.pageSize<result.total) {
+        if (pageNum < pages) {
+            p += "<a class=\"text-primary\"onclick='topage(" + (result.pageNum + 1) + ")'>下一页</a>";
+        }
+    }
+    if(!$("select[name='pageSize']").val()){
+    p+="<select class='text-center ml-3' name=\"pageSize\" style=\"width:160px;\">\n" +
+    "                    <option>3条/页</option>\n" +
+    "                    <option>6条/页</option>\n" +
+    "                    <option>9条/页</option>\n" +
+    "                    <option>12条/页</option>\n" +
+    "                </select>"
+    }
+    p+="</p>";
+    $("#tab").append(html);
+    $("#tab").after(p);
+
+
+})}
+
+function topage(pageNum,pageSize) {
+        k=0;
+    document.getElementById("check").checked=false;
+    getUserInfo(pageNum,$("select[name='pageSize']").val());
+}
+    $('#UpstaticBackdrop').on('show.bs.modal', function (event) {
+        //获取所有的Input
+        var jQuery = $("#UpstaticBackdrop input");
+        //获取触发模态窗口显示的标签
+        var button = $(event.relatedTarget);
+
+        var Arr = new Array();
+
+        $.post("/userS/selectById",{"id":button.val()},function (result){
+            if(result){
+                console.log(result)
+                Arr.push(result.uid);
+                Arr.push(result.uloginname);
+                Arr.push(result.upass);
+                Arr.push(result.uname);
+                Arr.push(result.udate);
+                for (var i=0;i< Arr.length;i++){
+                    $(jQuery)[i].value = Arr[i];
+                }
+            }
+        });
+        ;
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    });
+</script>
+</body>
+</html>

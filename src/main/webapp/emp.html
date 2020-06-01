@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        a{
+            margin: 5px;
+            color: blue;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+<!--<div class="container">-->
+    <div class="card  bg-white">
+
+        <div class="card-header bg-light border" style="width: 1500px">
+            <i class="fa fa-list-ul fa-lg ml-2 mr-2" ></i>
+            职位信息列表
+        </div>
+        <div class="card-body" style="width: 1500px">
+
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+
+
+                    <button type="button" data-toggle="modal"  data-target="#staticBackdrop" class="btn btn-primary mb-2 ml-3  "><i class="fa fa-calendar-plus-o fa-lg ml-2 mr-2" ></i>添加部门信息</button>
+                    <!-- <input type="button" class=" ml-3  form-control mb-2 btn-primary" id="inlineFormInput"  value="添加学员"> -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">添加员工信息</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/emp/add" method="post">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">名称</label>
+                                                <input type="text" class="form-control" value="" id="inputEmail4" name="eName" required >
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputSex">性别</label>
+                                                <input type="text" class="form-control" value="" id="inputSex" name="eSex" required >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputeIphone">手机号码</label>
+                                                <input type="text" class="form-control" value="" id="inputeIphone" name="eIphone" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputeeAddres">邮箱</label>
+                                                <input type="text" class="form-control" value="" id="inputeeAddres" name="eEmail" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <select  id="addjob"  name="job.jId" style="width:467px;height: 35px">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputeeRecord">学历</label>
+                                                <input type="text" class="form-control" value="" id="inputeeRecord" name="eRecord" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputeCar">身份证号码</label>
+                                                <input type="text" class="form-control" value="" id="inputeCar" name="eCar" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <select  id="adddept" name="dept.dId" style="width:467px;height: 35px">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="Addres">联系地址</label>
+                                                <input type="text" class="form-control" value="" id="Addres" name="eAddres" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputeeDate">归档日期</label>
+                                                <input type="date" class="form-control" value="" id="inputeeDate" name="eDate" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--            修改            -->
+                    <div class="modal fade" id="UpstaticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="UpstaticBackdropLabel">修改学员信息</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" >
+                                    <form action="/emp/update" method="post">
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="UpeId">ID</label>
+                                                <input type="text" class="form-control" value="" id="UpeId" name="eId" required readonly >
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputEmail4">名称</label>
+                                                <input type="text" class="form-control" value="" id="UpinputEmail4" name="eName" required >
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputEmail4">性别</label>
+                                                <input type="text" class="form-control" value="" id="UpinputSex" name="eSex" required >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputeIphone">手机号码</label>
+                                                <input type="text" class="form-control" value="" id="UpinputeIphone" name="eIphone" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputeeAddres">邮箱</label>
+                                                <input type="text" class="form-control" value="" id="UpinputeeAddres" name="eEmail" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <select  id="Upjob"  name="job.jId" style="width:467px;height: 35px">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputeIphone">学历</label>
+                                                <input type="text" class="form-control" value="" id="UpinputeeRecord" name="eRecord" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputeCar">身份证号码</label>
+                                                <input type="text" class="form-control" value="" id="UpinputeCar" name="eCar" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <select  id="Updept" name="dept.dId" style="width:467px;height: 35px">
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="UpAddres">联系地址</label>
+                                                <input type="text" class="form-control" value="" id="UpAddres" name="eAddres" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="UpinputeeDate">归档日期</label>
+                                                <input type="date" class="form-control" value="" id="UpinputeeDate" name="eDate" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary">修改</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--             修改完成           -->
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                    <div class="input-group mb-2 ml-3 ">
+                        <div class="input-group-prepend mt-1">
+
+                        </div>
+                        <form class="form-inline" id="queryByParamForm">
+                            <select  id="dept" name="dept.dId" style="width: 210px;height: 35px" class=" ml-3">
+                                <option></option>
+                            </select>
+                            <select  id="job"  name="job.jId" style="width: 210px;height: 35px" class=" ml-3">
+                                <option></option>
+                            </select>
+                            <input type="text"  class="form-control   ml-3 " id="inlineFormInputGroup" name="eName" placeholder="请输入姓名">
+                            <input type="text"  class="form-control    ml-3" id="ilineFormInputp" name="eCar" placeholder="请输入身份证">
+                            <input type="text"  class="form-control   ml-3" id="inlineFormInpGroup" name="eIphone" placeholder="请输入手机号">
+                            <div class="col-auto">
+                                <button type="button" onclick="select()"  class="btn btn-primary mb-3 mt-3 ml-3 "><i class="fa fa-search fa-lg ml-2 mr-2" ></i>搜索</button>
+                                <button type="button" onclick="batchDel()" class="btn btn-danger">删除选择行</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="card-footer text-center" style="width: 1500px">
+            <form action="/emp/delete" method="post" id="batchDel">
+<!--       当点击删除多行按钮时提交表单，把所以name="ids"的选项全部提交    -->
+            <table id="tab" class="table bg-white ">
+                <thead>
+                <th><input type="checkbox" name="check" id="inp" value="" /></th>
+                <th scope="col">序号</th>
+                <th scope="col">姓名</th>
+                <th scope="col">性别</th>
+                <th scope="col">手机号码</th>
+                <th scope="col">邮箱</th>
+                <th scope="col">职位</th>
+                <th scope="col">学历</th>
+                <th scope="col">身份证号码</th>
+                <th scope="col">部门</th>
+                <th scope="col">联系地址</th>
+                <th scope="col">归档日期</th>
+                <th scope="col">操作</th>
+                </thead>
+            </table>
+                <select name="pageSize" style="width:160px">
+                    <option value="3">3条/页</option>
+                    <option  value="6">6条/页</option>
+                    <option value="9">9条/页</option>
+                    <option value="12" >12条/页</option>
+                </select>
+            </form>
+        </div>
+    </div>
+<!--</div>-->
+<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap.bundle.js"></script>
+<script type="text/javascript">
+    $(function () {
+        getEmpInFo(1);
+    });
+    /*
+    全选按钮
+    * */
+
+    var inp=document.getElementById("inp");
+    var ck=document.getElementsByName("ids");
+    var k=0;
+    inp.onclick=function(){
+        for(var i=0;i<ck.length;i++)
+            ck[i].checked=this.checked;
+
+    }
+    //权限按钮
+
+    $("table").on("click","input[name='ids']",function(){
+        if(this.checked){
+            k++;
+        }else{
+            k--;
+        }
+        if(k==ck.length){
+            inp.checked = true;
+
+        }else{
+            inp.checked=false;
+        }
+    })
+
+
+    //删除单个
+    function del(num){
+        if(confirm('确定要删除吗?')){
+            $.post("/emp/delete",{"ids":num.value},function(result) {
+                if (result==true){
+                    alert('删除成功!');
+                }else {
+                    if(confirm('您没有删除权限，是否重新登陆?')){
+                        window.parent.location.href="/login.html";
+                    }else {
+                        return ;
+                    }
+                }
+            });
+        };
+    }
+//批量删除
+    function batchDel(){
+        var num=0;
+        let elementsByName = document.getElementsByName("ids");
+        for (var i = 0;i<elementsByName.length;i++){
+            if(elementsByName[i].checked){
+                num = 1;
+            }
+        }
+        if(num==0){
+            alert('最少选择一条数据');
+            return false;
+        }
+        if(confirm('确定删除选择行吗?')){
+            $("#batchDel").submit();
+            // getDeptInFo(1);
+        }else {
+          return ;
+        }
+    };
+
+
+    var pageNum;
+    var pages;
+    //异步加载数据
+    function getEmpInFo(pageNum){
+
+        $.post("/emp/selectAll",{"pageNum":pageNum,"pageSize":4}, function (result) {
+
+            if(result.pageInfo.list.length<1){
+
+                if(result.pageInfo.list.length<1){
+
+                if(confirm('权限不足,是否重新登陆？')){
+                    window.parent.location.href="/login.html";
+                 }
+                }
+            }else{
+                console.log(result);
+            }
+
+            $("#tab").find("tbody").remove();
+            //删除p标签里面的超链接
+            $("#tab").next("p").remove();
+                 var html="<tbody>";
+
+            for (var i = 0; i <result.pageInfo.list.length; i++) {
+                 var res = result.pageInfo.list[i];
+                pageNum = result.pageInfo.pageNum;
+                pages = result.pageInfo.pages;
+                html += "<tr>";
+                html+="  <td> <input type=\"checkbox\" name=\"ids\" id=\"\" value="+res.eid+"></td>"
+                html += "<td>" + (i+1) + "</td><td>" + res.ename + "</td><td>" + res.esex + "</td>"
+                html += "<td>" + res.eiphone + "</td><td>" + res.eemail + "</td><td>" +res.job.jname + "</td>"
+                html += "<td>" + res.erecord + "</td><td>" + res.ecar + "</td><td>" + res.dept.dname + "</td>"
+                html += "<td>" + res.eaddres + "</td><td>" + res.edate + "</td>"
+                html += "<td>\n" +
+                    "<button type=\"button\" data-toggle=\"modal\"  data-target=\"#UpstaticBackdrop\" class=\"btn border-primary text-primary\"  value=" + res.eid + ">\n" +
+                    "<svg class=\"bi bi-pencil-square\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    " <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>\n" +
+                    " <path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z\" clip-rule=\"evenodd\"/>\n" +
+                    "</svg>\n" +
+                    "修改</button>\n" +
+                    "<button type=\"button\" class=\"btn border-danger text-danger\" onclick=\"del(this)\" value=" +  res.eid+ ">\n" +
+                    "<svg class=\"bi bi-trash\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    " <path d=\"M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z\"/>\n" +
+                    " <path fill-rule=\"evenodd\" d=\"M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z\" clip-rule=\"evenodd\"/>\n" +
+                    "</svg>\n" +
+                    "删除</button></td>"
+                html += "</tr>"
+            }
+
+            var p ="<p>";
+            if(pageNum>1){
+                p +="<a class=\"text-primary\" onclick='topage("+(pageNum-1)+")'>上一页</a>";
+            }
+            if(pageNum<pages){
+                p +="<a class=\"text-primary\" onclick='topage("+(pageNum+1)+")'>下一页</a>";
+            }
+            if(pages>1){
+                for (var i = 0;i<pages;i++){
+                    p +="<a class=\"text-primary\"  onclick='topage("+(i+1)+")'>"+(i+1)+"</a>";
+                }
+            }
+            p+="</p>"
+
+             html+="</tbody>"
+            $("#tab").append(html);
+            $("#tab").after(p);
+            $("#job option:gt(0)").remove();
+            $("#dept option:gt(0)").remove();
+            for(var i = 0;i<result.depts.length;i++){
+                var res = result.depts[i];
+                   $("#dept").append("<option value='"+res.did+"'>"+res.dname+"</option>");
+            }
+            for(var i = 0;i<result.jobs.length;i++){
+                var res = result.jobs[i];
+                $("#job").append("<option value='"+res.jid+"'>"+res.jname+"</option>");
+            }
+        })
+    };
+    //页面刷新拼接数据结束。
+    function topage(pageNum){
+        document.getElementById("inp").checked = false;
+        getEmpInFo(pageNum);
+    }
+//带参数的分页查询
+    function topageParam(pageNum){
+        document.getElementById("inp").checked = false;
+        var queryByParam =  $("#queryByParamForm").serialize();
+        SelectByParam(pageNum,queryByParam);
+    }
+//点击搜索的时候，获取所有的参数，调用SelectByParam(根据参数查询)
+    function select(){
+
+        //动态查询时，获取表单里面的所有input的值
+        var queryByParam =  $("#queryByParamForm").serialize();
+        SelectByParam(1,queryByParam);
+
+        // $.post("/emp/selectAll",{"pageNum":1,"pageSize":"3",queryByParam},function (result) {
+        //       console.log(result)
+        //     $("#tab").find("tr").remove();
+        //       //  $("#tab").find("tr:gt(0)").remove();
+        //         $("#tab").next("p").remove();
+        //        alert(result.pageInfo)
+        //         var html = ""
+        //         if (result.pageInfo.list.length > 0) {
+        //             for (var i = 0; i <result.pageInfo.list.length; i++) {
+        //                 var res = result.pageInfo.list[i];
+        //                 pageNum = result.pageInfo.pageNum;
+        //                 pages = result.pageInfo.pages;
+        //                 html += "<tr>";
+        //                 html+="  <td> <input type=\"checkbox\" name=\"ids\" id=\"\" value="+res.eid+"></td>"
+        //                 html += "<td>" + (i+1) + "</td><td>" + res.ename + "</td><td>" + res.esex; + "</td>"
+        //                 html += "<td>" + res.eiphone + "</td><td>" + res.eemail + "</td><td>" +res.job.jname + "</td>"
+        //                 html += "<td>" + res.erecord + "</td><td>" + res.ecar + "</td><td>" + res.dept.dname + "</td>"
+        //                 html += "<td>" + res.eaddres + "</td><td>" + res.edate + "</td>"
+        //                 html += "<td>\n" +
+        //                     "<button type=\"button\" data-toggle=\"modal\"  data-target=\"#UpstaticBackdrop\" class=\"btn border-primary text-primary\"  value=" + res.eid + ">\n" +
+        //                     "<svg class=\"bi bi-pencil-square\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+        //                     " <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>\n" +
+        //                     " <path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z\" clip-rule=\"evenodd\"/>\n" +
+        //                     "</svg>\n" +
+        //                     "修改</button>\n" +
+        //                     "<button type=\"button\" class=\"btn border-danger text-danger\" onclick=\"del(this)\" value=" +  res.eid+ ">\n" +
+        //                     "<svg class=\"bi bi-trash\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+        //                     " <path d=\"M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z\"/>\n" +
+        //                     " <path fill-rule=\"evenodd\" d=\"M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z\" clip-rule=\"evenodd\"/>\n" +
+        //                     "</svg>\n" +
+        //                     "删除</button></td>"
+        //                 html += "</tr>"
+        //             }
+        //
+        //             var p ="<p>";
+        //             if(pageNum>1){
+        //                 p +="<a class=\"text-primary\" onclick='topage("+(pageNum-1)+")'>上一页</a>";
+        //             }
+        //             if(pageNum<pages){
+        //                 p +="<a class=\"text-primary\" onclick='topage("+(pageNum+1)+")'>下一页</a>";
+        //             }
+        //             if(pages>1){
+        //                 for (var i = 0;i<pages;i++){
+        //                     p +="<a class=\"text-primary\"  onclick='topage("+(i+1)+")'>"+(i+1)+"</a>";
+        //                 }
+        //             }
+        //             p+="</p>"
+        //
+        //             for(var i = 0;i<result.depts.length;i++){
+        //                 var res = result.depts[i];
+        //                 $("#dept").append("<option value='"+res.did+"'>"+res.dname+"</option>");
+        //             }
+        //             for(var i = 0;i<result.jobs.length;i++){
+        //                 var res = result.jobs[i];
+        //                 $("#job").append("<option value='"+res.jid+"'>"+res.jname+"</option>");
+        //             }
+        //             $("#tab").append(html);
+        //             $("#tab").after(p);
+        //         } else {
+        //             $("#tab").find("tr").remove();
+        //             //删除p标签里面的超链接
+        //             $("#tab").next("p").remove();
+        //             if (confirm('您查询的数据不存在!')) {
+        //                 ;
+        //             }
+        //         }
+        // })
+    }
+
+    //根据参数动态查询
+    function SelectByParam(pageNum,selectByParam){
+
+       // alert(selectByParam);
+        $.post("/emp/selectAll","pageNum="+pageNum+"&pageSize="+4+"&"+selectByParam,function (result){
+            $("#tab").find("tbody").remove();
+            $("#tab").next("p").remove();
+            var html = "<tbody>"
+            alert(result.pageInfo.list.length)
+            if(result.pageInfo.list.length>0) {
+                for (var i = 0; i < result.pageInfo.list.length; i++){
+                    var res = result.pageInfo.list[i];
+                    html += "<tr>";
+                    html += "<td>" + (i+1) + "</td><td>" + res.ename + "</td><td>" + res.esex + "</td>"
+                    html += "<td>" + res.eiphone + "</td><td>" + res.eemail + "</td><td>" +res.job.jname + "</td>"
+                    html += "<td>" + res.erecord + "</td><td>" + res.ecar + "</td><td>" + res.dept.dname + "</td>"
+                    html += "<td>" + res.eaddres + "</td><td>" + res.edate + "</td>"
+                    html += "<td>\n" +
+                        "<button type=\"button\" data-toggle=\"modal\"  data-target=\"#UpstaticBackdrop\" class=\"btn border-primary text-primary\"  value=" + res.jid + ">\n" +
+                        "<svg class=\"bi bi-pencil-square\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        " <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>\n" +
+                        " <path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z\" clip-rule=\"evenodd\"/>\n" +
+                        "</svg>\n" +
+                        "修改</button>\n" +
+                        "<button type=\"button\" class=\"btn border-danger text-danger\" onclick=\"del(this)\" value=" + res.jid+ ">\n" +
+                        "<svg class=\"bi bi-trash\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        " <path d=\"M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z\"/>\n" +
+                        " <path fill-rule=\"evenodd\" d=\"M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z\" clip-rule=\"evenodd\"/>\n" +
+                        "</svg>\n" +
+                        "删除</button></td>"
+                    html += "</tr>"
+                }
+
+                var p="<p>"
+                if(result.pageNum>1){
+                    p +="<a class=\"text-primary\"onclick='topageParam("+(result.pageNum-1)+")'>上一页</a>"
+                }
+                if(result.pageNum<result.pages){
+                    p +="<a class=\"text-primary\"onclick='topageParam("+(result.pageNum+1)+")'>下一页</a>"
+                }
+                if(result.pages>1){
+                    for (var i = 0;i<pages;i++){
+                        p +="<a class=\"text-primary\"onclick='topageParam("+(i+1)+")'>"+(i+1)+"</a>";
+                    }
+                }
+                html+="</tbody>"
+                $("#tab").append(html);
+                $("#tab").after(p);
+            }else{
+
+
+                $("#tab").find("tbody").remove();
+                $("#tab").next("p").remove();
+                alert('您查询的数据不存在');
+                getEmpInFo(1);
+            }
+
+        })
+    }
+
+
+    $('#staticBackdrop').on('show.bs.modal', function (event) {
+
+        $("#addjob").html("");
+        $("#adddept").html("");
+
+        //添加时把下拉列表先赋值
+        var  addJobOption = $("#job option").clone();
+        var  addDeptOption = $("#dept option").clone()
+
+        $("#addjob").append(addJobOption);
+        $("#adddept").append(addDeptOption);
+    });
+
+    //触发模态窗口事件
+    $('#UpstaticBackdrop').on('show.bs.modal', function (event) {
+        var jQuery = $("#UpstaticBackdrop input");
+        //获取触发模态窗口显示的标签
+        var button = $(event.relatedTarget);
+        var Arr = new Array();
+       //先把下拉列表的数据清空
+        $("#Upjob").html("");
+        $("#Updept").html("");
+
+       var job_option = $("#job option").clone();
+        var dept_option = $("#dept option").clone()
+
+        $("#Upjob").append(job_option);
+        $("#Updept").append(dept_option);
+
+        $.post("/emp/selectById",{"id":button.val()},function(res){
+            console.log(res);
+            Arr.push(res.eid);
+            Arr.push(res.ename);
+            Arr.push(res.esex);
+            Arr.push(res.eiphone);
+            Arr.push(res.eemail);
+
+            Arr.push(res.erecord);
+            Arr.push(res.ecar);
+
+            Arr.push(res.eaddres);
+            Arr.push(res.edate);
+
+
+            for (var i = 0; i < Arr.length; i++){
+                $(jQuery)[i].value = Arr[i];
+            }
+            //当你点击那个修改的时候，你那个下拉菜单的值，就是默认选中的就是你那个ID查出来的值。
+            for(var i = 0;i<job_option.length;i++){
+                if(res.job.jname==job_option[i].innerHTML){
+                    job_option[i].selected = true;
+                }
+            }
+            for(var j = 0;j<job_option.length;j++){
+                if(res.dept.dname==job_option[j].innerHTML){
+                    dept_option[j].selected = true;
+                }
+            }
+        });
+
+        var recipient = button.data('whatever');
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    });
+
+</script>
+
+</body>
+</html>

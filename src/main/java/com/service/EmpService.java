@@ -1,5 +1,6 @@
 package com.service;
 
+import com.entity.Document;
 import com.entity.Emp;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public interface EmpService {
 
+    List<Emp> queryAll(Emp emp);
     /**
      * 通过ID查询单条数据
      *
@@ -34,7 +36,7 @@ public interface EmpService {
      * @param emp 实例对象
      * @return 实例对象
      */
-    Emp insert(Emp emp);
+   int insert(Emp emp);
 
     /**
      * 修改数据
@@ -42,14 +44,15 @@ public interface EmpService {
      * @param emp 实例对象
      * @return 实例对象
      */
-    Emp update(Emp emp);
+    int update(Emp emp);
 
     /**
      * 通过主键删除数据
      *
-     * @param eId 主键
+     *
      * @return 是否成功
      */
-    boolean deleteById(Integer eId);
-
+    boolean deleteById( List<Integer> ids) throws Exception;
+    //根据参数分页查询
+    List<Emp> queryByParam(Emp emp);
 }

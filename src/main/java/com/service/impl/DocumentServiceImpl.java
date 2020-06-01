@@ -12,7 +12,7 @@ import java.util.List;
  * (Document)表服务实现类
  *
  * @author makejava
- * @since 2020-05-15 07:41:37
+ * @since 2020-05-22 16:45:55
  */
 @Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
@@ -49,9 +49,13 @@ public class DocumentServiceImpl implements DocumentService {
      * @return 实例对象
      */
     @Override
-    public Document insert(Document document) {
-        this.documentDao.insert(document);
-        return document;
+    public int insert(Document document) {
+     return    this.documentDao.insert(document);
+    }
+
+    @Override
+    public List<Document> queryAll(Document document) {
+        return this.documentDao.queryAll(document);
     }
 
     /**
@@ -61,9 +65,9 @@ public class DocumentServiceImpl implements DocumentService {
      * @return 实例对象
      */
     @Override
-    public Document update(Document document) {
-        this.documentDao.update(document);
-        return this.queryById(document.getDId());
+    public int update(Document document) {
+        return  this.documentDao.update(document);
+
     }
 
     /**

@@ -8,7 +8,7 @@ import java.util.List;
  * (Document)表数据库访问层
  *
  * @author makejava
- * @since 2020-05-15 07:41:37
+ * @since 2020-05-22 16:45:53
  */
 public interface DocumentDao {
 
@@ -27,7 +27,7 @@ public interface DocumentDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<Document> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Document> queryAllByLimit(@Param("pageNum") int offset, @Param("pageSize") int limit);
 
 
     /**

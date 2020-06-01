@@ -1,5 +1,7 @@
 package com.service;
 
+import com.entity.Document;
+import com.entity.Emp;
 import com.entity.Job;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * @since 2020-05-15 07:41:58
  */
 public interface JobService {
-
+    List<Job> queryAll(Job job);
     /**
      * 通过ID查询单条数据
      *
@@ -34,7 +36,7 @@ public interface JobService {
      * @param job 实例对象
      * @return 实例对象
      */
-    Job insert(Job job);
+    int insert(Job job);
 
     /**
      * 修改数据
@@ -42,14 +44,14 @@ public interface JobService {
      * @param job 实例对象
      * @return 实例对象
      */
-    Job update(Job job);
+    int update(Job job);
 
     /**
      * 通过主键删除数据
      *
-     * @param jId 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer jId);
+    boolean deleteById(List<Integer> ids) throws Exception;
 
+    List<Job> queryByParam(Job job);
 }

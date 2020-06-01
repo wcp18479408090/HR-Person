@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.entity.Job;
 import com.entity.Notice;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -12,13 +13,14 @@ import java.util.List;
  */
 public interface NoticeDao {
 
+    List<Notice> queryByParam(Notice notice );
     /**
      * 通过ID查询单条数据
      *
      * @param nId 主键
      * @return 实例对象
      */
-    Notice queryById(Integer nId);
+    Notice queryById(@Param("nId") Integer nId);
 
     /**
      * 查询指定行数据
@@ -33,7 +35,7 @@ public interface NoticeDao {
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param notice 实例对象
+
      * @return 对象列表
      */
     List<Notice> queryAll(Notice notice);
@@ -60,6 +62,6 @@ public interface NoticeDao {
      * @param nId 主键
      * @return 影响行数
      */
-    int deleteById(Integer nId);
+    int deleteById(@Param("nId")Integer nId);
 
 }

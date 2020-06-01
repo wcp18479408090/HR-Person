@@ -11,7 +11,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="DeptMap">
         select
-          d_id, d_name, d_desc
+          d_id, d_name, d_desc,statu
         from personmanage.dept
         where d_id = #{dId}
     </select>
@@ -27,7 +27,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="DeptMap">
         select
-          d_id, d_name, d_desc
+          d_id, d_name, d_desc,statu
         from personmanage.dept
         <where>
             <if test="dId != null">
@@ -39,13 +39,14 @@
             <if test="dDesc != null and dDesc != ''">
                 and d_desc = #{dDesc}
             </if>
+            and  statu >0
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="dId" useGeneratedKeys="true">
-        insert into personmanage.dept(d_name, d_desc)
-        values (#{dName}, #{dDesc})
+        insert into personmanage.dept(d_name, d_desc,statu)
+        values (#{dName}, #{dDesc}, #{statu})
     </insert>
 
     <!--通过主键修改数据-->
@@ -58,13 +59,20 @@
             <if test="dDesc != null and dDesc != ''">
                 d_desc = #{dDesc},
             </if>
+            <if test="statu != null and statu != ''">
+                statu = #{statu},
+            </if>
         </set>
         where d_id = #{dId}
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from personmanage.dept where d_id = #{dId}
-    </delete>
+    <update id="deleteById">
+      update dept
+        <set>
+            statu = 0
+        </set>
+        where d_id = #{dId};
+    </update>
 
 </mapper>

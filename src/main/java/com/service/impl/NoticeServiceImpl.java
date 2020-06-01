@@ -19,6 +19,11 @@ public class NoticeServiceImpl implements NoticeService {
     @Resource
     private NoticeDao noticeDao;
 
+    @Override
+    public List<Notice> queryAll(Notice notice) {
+        return noticeDao.queryAll(notice);
+    }
+
     /**
      * 通过ID查询单条数据
      *
@@ -49,9 +54,9 @@ public class NoticeServiceImpl implements NoticeService {
      * @return 实例对象
      */
     @Override
-    public Notice insert(Notice notice) {
-        this.noticeDao.insert(notice);
-        return notice;
+    public int insert(Notice notice) {
+        return this.noticeDao.insert(notice);
+
     }
 
     /**
@@ -61,19 +66,32 @@ public class NoticeServiceImpl implements NoticeService {
      * @return 实例对象
      */
     @Override
-    public Notice update(Notice notice) {
-        this.noticeDao.update(notice);
-        return this.queryById(notice.getNId());
+    public int update(Notice notice) {
+        return  this.noticeDao.update(notice);
+
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param nId 主键
+
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer nId) {
-        return this.noticeDao.deleteById(nId) > 0;
+    public boolean deleteById(List<Integer> ids)throws Exception {
+        int count = 0;
+        for (Integer id:ids){
+            int num = this.noticeDao.deleteById(id);
+            count += num;
+        }
+      if (count<ids.size()){
+          throw  new Exception("删除失败");
+      }
+      return true;
+    }
+
+    @Override
+    public List<Notice> queryByParam(Notice notice) {
+        return noticeDao.queryByParam(notice);
     }
 }

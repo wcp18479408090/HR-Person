@@ -20,10 +20,8 @@ public class Job implements Serializable {
     private String jName;
     
     private String jDesc;
-
-    List<Emp> empList;
-
-
+    //状态
+    private int statu;
 
 
 }

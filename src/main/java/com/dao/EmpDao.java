@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.entity.Document;
 import com.entity.Emp;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -12,13 +13,18 @@ import java.util.List;
  */
 public interface EmpDao {
 
+    List <Emp> selectEmpAll();
+
+
+    List<Emp> queryByParam(Emp emp);
+
     /**
      * 通过ID查询单条数据
      *
      * @param eId 主键
      * @return 实例对象
      */
-    Emp queryById(Integer eId);
+    Emp queryById(@Param("eId")Integer eId);
 
     /**
      * 查询指定行数据
@@ -33,7 +39,7 @@ public interface EmpDao {
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param emp 实例对象
+
      * @return 对象列表
      */
     List<Emp> queryAll(Emp emp);
@@ -60,6 +66,6 @@ public interface EmpDao {
      * @param eId 主键
      * @return 影响行数
      */
-    int deleteById(Integer eId);
+    int deleteById(@Param("eId") Integer eId);
 
 }

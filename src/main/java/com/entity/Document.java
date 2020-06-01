@@ -8,21 +8,26 @@ import java.io.Serializable;
  * (Document)实体类
  *
  * @author makejava
- * @since 2020-05-15 07:41:37
+ * @since 2020-05-22 16:45:52
  */
 @Data
 public class Document implements Serializable {
-    private static final long serialVersionUID = 810258204410780096L;
+    private static final long serialVersionUID = -72561787049564080L;
     
     private Integer dId;
     
-    private String dName;
-    
     private String dFilename;
     
-    private Object dDate;
+    private String dDate;
     
-    private UserS userS;
+    private Integer uId;
+    
+    private String suffix;
+    
+    private Long size;
+    
+    private String filepash;
+
 
 
 

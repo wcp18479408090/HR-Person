@@ -3,6 +3,8 @@ package com.dao;
 import com.entity.UserS;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * (UserS)表数据库访问层
@@ -12,13 +14,23 @@ import java.util.List;
  */
 public interface UserSDao {
 
+   //根据登陆名查询
+
+    UserS queryByName(String name);
+
+    //查询登陆的用户的角色集合
+    Set <String> queryRoles(String userName);
+
+    //查询登陆的用户的权限集合
+    Set <String> queryPower(String userName);
+
     /**
      * 通过ID查询单条数据
      *
      * @param uId 主键
      * @return 实例对象
      */
-    UserS queryById(Integer uId);
+    UserS queryById(@Param("uId") Integer uId);
 
     /**
      * 查询指定行数据
@@ -33,10 +45,14 @@ public interface UserSDao {
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param userS 实例对象
+
      * @return 对象列表
      */
-    List<UserS> queryAll(UserS userS);
+    List<UserS> queryAll();
+
+    //根据客户端传递的参数进行查询
+
+    List<UserS> queryByParam(UserS userS);
 
     /**
      * 新增数据
@@ -60,6 +76,7 @@ public interface UserSDao {
      * @param uId 主键
      * @return 影响行数
      */
-    int deleteById(Integer uId);
+    int deleteById(@Param("uId")Integer uId);
 
+    UserS login(Map<String,Object> map);
 }

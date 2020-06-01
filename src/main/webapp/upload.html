@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<!--<div class="container">-->
+    <div class="card text-center">
+        <div class="card-header bg-primary" >
+          当前位置:文档上传
+        </div>
+        <div class="card-body text-center">
+            <form action="/document/Upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"><h3>文档标题</h3></label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="dFilename" placeholder="文档标题">
+                    </div>
+
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+                </div>
+
+        <div class="card-footer text-muted bg-light">
+
+                <input type="submit" value="上传">
+                <input type="reset" value="重置">
+
+        </div>
+        </form>
+    </div>
+
+
+</div>
+<!--</div>-->
+</body>
+</html>

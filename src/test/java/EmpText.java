@@ -1,3 +1,4 @@
+import com.dao.EmpDao;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.util.MyBatisConfig;
@@ -7,6 +8,13 @@ import org.junit.Test;
 public class EmpText {
     EmpDao empDao = MyBatisConfig.getMapper(EmpDao.class);
 
+    @Test
+    public void getEmp(){
+      empDao.selectEmpAll().forEach(emp -> {
+          System.out.println(emp);
+          System.out.println(emp.getDept().getDName());
+      });
+    }
     @Test
     public void getEmpByLimit(){
 //        开启分页查询

@@ -7,7 +7,7 @@ import java.util.List;
  * (Document)表服务接口
  *
  * @author makejava
- * @since 2020-05-15 07:41:37
+ * @since 2020-05-22 16:45:54
  */
 public interface DocumentService {
 
@@ -34,7 +34,7 @@ public interface DocumentService {
      * @param document 实例对象
      * @return 实例对象
      */
-    Document insert(Document document);
+    int  insert(Document document);
 
     /**
      * 修改数据
@@ -42,7 +42,9 @@ public interface DocumentService {
      * @param document 实例对象
      * @return 实例对象
      */
-    Document update(Document document);
+
+    List<Document> queryAll(Document document);
+    int update(Document document);
 
     /**
      * 通过主键删除数据

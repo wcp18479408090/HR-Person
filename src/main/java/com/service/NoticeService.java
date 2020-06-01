@@ -1,5 +1,6 @@
 package com.service;
 
+import com.entity.Job;
 import com.entity.Notice;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public interface NoticeService {
 
+    List<Notice> queryAll(Notice notice);
     /**
      * 通过ID查询单条数据
      *
@@ -34,22 +36,20 @@ public interface NoticeService {
      * @param notice 实例对象
      * @return 实例对象
      */
-    Notice insert(Notice notice);
+   int insert(Notice notice);
 
     /**
-     * 修改数据
-     *
-     * @param notice 实例对象
      * @return 实例对象
      */
-    Notice update(Notice notice);
+    int update(Notice notice);
 
     /**
      * 通过主键删除数据
      *
-     * @param nId 主键
+     *
      * @return 是否成功
      */
-    boolean deleteById(Integer nId);
+    boolean deleteById(List<Integer> ids) throws Exception;
 
+    List<Notice> queryByParam(Notice notice);
 }

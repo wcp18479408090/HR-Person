@@ -19,6 +19,11 @@ public class EmpServiceImpl implements EmpService {
     @Resource
     private EmpDao empDao;
 
+    @Override
+    public List<Emp> queryAll(Emp emp) {
+        return empDao.queryAll(emp);
+    }
+
     /**
      * 通过ID查询单条数据
      *
@@ -49,9 +54,9 @@ public class EmpServiceImpl implements EmpService {
      * @return 实例对象
      */
     @Override
-    public Emp insert(Emp emp) {
-        this.empDao.insert(emp);
-        return emp;
+    public int insert(Emp emp) {
+        return this.empDao.insert(emp);
+       // return emp;
     }
 
     /**
@@ -61,19 +66,32 @@ public class EmpServiceImpl implements EmpService {
      * @return 实例对象
      */
     @Override
-    public Emp update(Emp emp) {
-        this.empDao.update(emp);
-        return this.queryById(emp.getEId());
+    public int update(Emp emp) {
+        return   this.empDao.update(emp);
+        //return this.queryById(emp.getEId());
     }
 
     /**
      * 通过主键删除数据
      *
-     * @param eId 主键
+     *
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer eId) {
-        return this.empDao.deleteById(eId) > 0;
+    public boolean deleteById( List<Integer> ids) throws Exception{
+        int count = 0;
+      for (Integer id:ids){
+          int i = this.empDao.deleteById(id);
+          count += i;
+      }
+      if (count<ids.size()){
+          throw new Exception("删除错误");
+      }
+      return true;
+    }
+
+    @Override
+    public List<Emp> queryByParam(Emp emp) {
+        return empDao.queryByParam(emp);
     }
 }

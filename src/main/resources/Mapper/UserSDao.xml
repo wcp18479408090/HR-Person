@@ -16,7 +16,7 @@
         select
           u_id, u_loginName, u_pass, u_name, u_state, u_date
         from personmanage.user_s
-        where u_id = #{uId}
+        where u_id = #{uId} and  u_state>0
     </select>
 
     <!--查询指定行数据-->
@@ -45,12 +45,11 @@
             <if test="uName != null and uName != ''">
                 and u_name = #{uName}
             </if>
-            <if test="uState != null">
-                and u_state = #{uState}
-            </if>
+
             <if test="uDate != null">
                 and u_date = #{uDate}
             </if>
+            and  u_state>0
         </where>
     </select>
 
@@ -83,9 +82,70 @@
         where u_id = #{uId}
     </update>
 
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from personmanage.user_s where u_id = #{uId}
-    </delete>
+    <!--通过主键逻辑删除,改变状态-->
+    <update id="deleteById">
+ update personmanage.user_s
+        <set>
+            u_state = 0
+        </set>
+        where u_id = #{uId}
+    </update>
 
+    <select id="login" resultMap="UserSMap">
+        select * from user_s
+     where u_loginName like #{loginName}  and u_pass like #{pass}
+    </select>
+    <select id="queryByParam" resultMap="UserSMap">
+       select
+          u_id, u_loginName, u_pass, u_name, u_state, u_date
+        from personmanage.user_s
+        <where>
+            <if test="uId != null">
+                and u_id = #{uId}
+            </if>
+            <if test="uLoginname != null and uLoginname != ''">
+                and u_loginName = #{uLoginname}
+            </if>
+            <if test="uPass != null and uPass != ''">
+                and u_pass = #{uPass}
+            </if>
+            <if test="uName != null and uName != ''">
+                and u_name = #{uName}
+            </if>
+
+            <if test="uState != null">
+              and u_state = #{uState}
+            </if>
+
+            <if test="uDate != null">
+                and u_date = #{uDate}
+            </if>
+
+        </where>
+
+    </select>
+
+<!--  通过用户名 查询改用户的角色集合  -->
+    <select id="queryPower" resultType="String">
+select p.p_name from POWER p
+INNER JOIN role_power rp on  p.p_id = rp.power_id
+INNER JOIN role  r on r.r_id = rp.role_id
+INNER JOIN role_user ru on ru.role_id = r.r_id
+INNER JOIN user_s u on u.u_id = ru.user_id
+and u.u_loginName = #{userName}
+    </select>
+
+<select id="queryRoles" resultType="String">
+ select  r_name from role  r WHERE r.r_id in(
+   select ru.role_id from role_user ru where ru.user_id in(
+     select u_id from user_s u where u.u_loginName = #{userName}
+   )
+ )
+</select>
+
+    <select id="queryByName" resultMap="UserSMap">
+
+select * from user_s where u_loginName = #{name}
+
+    </select>
 </mapper>

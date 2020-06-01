@@ -7,15 +7,18 @@
         <result property="nName" column="n_name" jdbcType="VARCHAR"/>
         <result property="nDesc" column="n_desc" jdbcType="VARCHAR"/>
         <result property="nDate" column="n_date" jdbcType="OTHER"/>
-        <result property="uId" column="u_id" jdbcType="INTEGER"/>
+        <association  property="userS" javaType="UserS">
+            <id column="user_id" property="uId"/>
+            <result property="uName" column="u_name" jdbcType="VARCHAR"/>
+        </association>
     </resultMap>
-
+    <sql id="notice">
+        SELECT n_id,n_name,n_desc,n_date, a.u_id ,b.u_name,b.u_id as user_id FROM notice a,user_s b WHERE a.u_id = b.u_id
+    </sql>
     <!--查询单个-->
     <select id="queryById" resultMap="NoticeMap">
-        select
-          n_id, n_name, n_desc, n_date, u_id
-        from personmanage.notice
-        where n_id = #{nId}
+        <include refid="notice"></include>
+        and n_id = #{nId} and state >0
     </select>
 
     <!--查询指定行数据-->
@@ -28,32 +31,31 @@
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="NoticeMap">
-        select
-          n_id, n_name, n_desc, n_date, u_id
-        from personmanage.notice
+
+        SELECT n_id,n_name,n_desc,n_date, a.u_id ,
+         b.u_name,b.u_id as user_id FROM notice a,user_s b
+
         <where>
             <if test="nId != null">
                 and n_id = #{nId}
             </if>
             <if test="nName != null and nName != ''">
-                and n_name = #{nName}
+                and n_name like concat('%',#{nName},'%')
             </if>
             <if test="nDesc != null and nDesc != ''">
-                and n_desc = #{nDesc}
+                and n_desc like concat('%',#{nDesc},'%')
             </if>
             <if test="nDate != null">
                 and n_date = #{nDate}
             </if>
-            <if test="uId != null">
-                and u_id = #{uId}
-            </if>
+               and  a.u_id = b.u_id and state >0
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="nId" useGeneratedKeys="true">
-        insert into personmanage.notice(n_name, n_desc, n_date, u_id)
-        values (#{nName}, #{nDesc}, #{nDate}, #{uId})
+        insert into personmanage.notice(n_name, n_desc, n_date, u_id,state)
+        values (#{nName}, #{nDesc}, #{nDate}, #{userS.uId},#{state})
     </insert>
 
     <!--通过主键修改数据-->
@@ -69,16 +71,21 @@
             <if test="nDate != null">
                 n_date = #{nDate},
             </if>
-            <if test="uId != null">
-                u_id = #{uId},
+            <if test="userS.uId != null">
+              u_id = #{userS.uId},
+             </if>
+            <if test="state != null and state != ''">
+                state = #{state},
             </if>
         </set>
         where n_id = #{nId}
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from personmanage.notice where n_id = #{nId}
-    </delete>
+    <update id="deleteById">
+        update  personmanage.notice
+        set state = 0
+        where n_id = #{nId}
+    </update>
 
 </mapper>

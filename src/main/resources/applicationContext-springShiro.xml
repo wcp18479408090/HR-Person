@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  配置shiro过滤器  -->
+    <bean id="filterShiro" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+      <property name="securityManager" ref="defaultWebSecurityManager"/>
+<!--      登录页面-->
+        <property name="loginUrl" value="/login.html"/>
+<!--        权限不足时跳转的页面-->
+<!--        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>-->
+<!--      认证成功的页面-->
+        <property name="successUrl" value="/index.html"/>
+        <property name="filterChainDefinitions">
+<!--            配置url过滤-->
+            <value>
+<!--       anon代表不需要过滤，可以直接访问         -->
+                /css/**=anon
+                /image/**=anon
+                /js/**=anon
+                /layui/**=anon
+                /login.html=anon
+                /userS/login=anon
+                /logout=logout
+                /unauthorized.html=anon
+<!--   剩下的都要验证   -->
+                /**=authc
+            </value>
+        </property>
+    </bean>
+
+    <bean id="defaultWebSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="realm"/>
+    </bean>
+
+<!--    自定义realm -->
+    <bean class="com.shiro.MyReaml" id="realm" />
+
+
+<!--    3.spring配置文件中配置-->
+    <!--spring邮件发送配置-->
+
+
+</beans>

@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.entity.Dept;
+import com.entity.UserS;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -12,13 +13,14 @@ import java.util.List;
  */
 public interface DeptDao {
 
+
     /**
      * 通过ID查询单条数据
      *
      * @param dId 主键
      * @return 实例对象
      */
-    Dept queryById(Integer dId);
+    Dept queryById(@Param("dId") Integer dId);
 
     /**
      * 查询指定行数据
@@ -29,11 +31,12 @@ public interface DeptDao {
      */
     List<Dept> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
+    //根据客户端传递的参数进行查询
 
+    List<Dept> queryByParam(Dept dept);
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param dept 实例对象
      * @return 对象列表
      */
     List<Dept> queryAll(Dept dept);
@@ -60,6 +63,6 @@ public interface DeptDao {
      * @param dId 主键
      * @return 影响行数
      */
-    int deleteById(Integer dId);
+    int deleteById(@Param("dId") Integer dId);
 
 }

@@ -21,6 +21,8 @@ public class Dept implements Serializable {
     
     private String dDesc;
 
-     List<Emp> empList;
+    //状态
+
+    private int  statu;
 
 }

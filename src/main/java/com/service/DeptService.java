@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface DeptService {
 
+    List<Dept> queryAll(Dept dept);
+
     /**
      * 通过ID查询单条数据
      *
@@ -34,7 +36,7 @@ public interface DeptService {
      * @param dept 实例对象
      * @return 实例对象
      */
-    Dept insert(Dept dept);
+    int insert(Dept dept);
 
     /**
      * 修改数据
@@ -42,14 +44,16 @@ public interface DeptService {
      * @param dept 实例对象
      * @return 实例对象
      */
-    Dept update(Dept dept);
+    int update(Dept dept);
 
     /**
      * 通过主键删除数据
      *
-     * @param dId 主键
+     *
      * @return 是否成功
      */
-    boolean deleteById(Integer dId);
+    boolean deleteById(List<Integer> ids) throws Exception;
+
+    List<Dept> queryByParam(Dept dept);
 
 }

@@ -29,12 +29,14 @@ public class Emp implements Serializable {
     private String eAddres;
     
     private String eRecord;
-    
+
+    private String eDate;
+
     private Dept dept;
     
     private Job job;
     
-    private String eDate;
+
 
 
 
